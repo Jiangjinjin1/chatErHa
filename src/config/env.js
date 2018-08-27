@@ -10,14 +10,14 @@
 export const ENV = process.env.NODE_ENV
 export const DEV = 'development'
 export const PRO = 'production'
-export const devHost = 'shop.smallerha.com'
-export const proHost = 'shop.smallerha.com'
-export const devImgUrl = 'shop.smallerha.com/images'
-export const proImgUrl = 'shop.smallerha.com/images'
+export const devHost = 'localhost:9000'
+export const proHost = 'erha.smallerha.com'
+export const devImgUrl = 'localhost:9000'
+export const proImgUrl = 'erha.smallerha.com'
 
 const newBaseURLMapping = {
-	[DEV]: `http://${devHost}/express/h5/web/index.php`,
-	[PRO]: `http://${proHost}/express/h5/web/index.php`
+	[DEV]: `http://${devHost}`,
+	[PRO]: `http://${proHost}`
 }
 
 const imgBaseURLMapping = {

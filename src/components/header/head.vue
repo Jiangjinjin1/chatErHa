@@ -41,7 +41,7 @@ export default {
 
     #head_top{
         background-color: $blue;
-        @mixin wh 100%, 1.95rem;
+        @mixin wh 100%, 2.2rem;
         display: flex;
         flex-direction: row;
         align-items: center;
