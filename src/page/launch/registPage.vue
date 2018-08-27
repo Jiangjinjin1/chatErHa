@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import HeadTop from '../../components/header/head'
 import ui from '../../modules/ui/ui'
 import {registAccount} from '../../service/launchApi'
@@ -47,6 +48,9 @@ export default {
 	},
 
 	methods: {
+    ...mapMutations([
+			'SET_USER_INFO'
+		]),
 		async regist () {
 			if (this._.isEmpty(this.phone) && !checkSimpleMobilePhone(this.phone)) {
 				ui.toast({title: '', msg: '请输入用户名'})
@@ -62,6 +66,7 @@ export default {
       })
       
       if(!this._.isEmpty(registResult)) {
+        this.SET_USER_INFO(registResult)
         this.$router.go(-1)
       }
 		}

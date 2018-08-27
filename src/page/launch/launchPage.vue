@@ -80,13 +80,14 @@ export default {
 			const loginResult = await login({
 				username: this.phone,
 				password: this.password
-			})
+			}).catch(e=> {
+        ui.toast({title: '', msg: '用户信息返回为空'})
+        return
+      })
 
 			if (!this._.isEmpty(loginResult)) {
 				this.SET_USER_INFO(loginResult)
 				this.$router.push({path: '/userInfoPage'})
-			} else {
-				ui.toast({title: '', msg: '用户信息返回为空'})
 			}
 		},
 

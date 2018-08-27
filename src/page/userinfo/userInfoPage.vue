@@ -18,7 +18,10 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 import HeadTop from '../../components/header/head'
+import {addNickName} from '../../service/launchApi'
+import ui from '../../modules/ui/ui'
 
 export default {
 	data () {
@@ -37,7 +40,22 @@ export default {
 	},
 
 	methods: {
-
+    ...mapMutations([
+      'SET_USER_INFO'
+    ]),
+    async confirmEdit() {
+      if(this._.isEmpty(this.nickname)) {
+        ui.toast({title: '', msg: '请填写昵称'})
+        return
+      }
+      
+      const nicknameResult = await addNickName({nickname: this.nickname})
+      
+      if(!this._.nicknameResult) {
+        this.SET_USER_INFO(nicknameResult)
+        // 跳转聊天窗口
+      }
+    }
 	}
 }
 </script>

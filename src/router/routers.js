@@ -7,7 +7,7 @@ const UserInfoPage = r => require.ensure([], () => r(require('../page/userinfo/u
 export default [
 	{
 		path: '',
-		redirect: '/registPage'
+		redirect: '/launchPage'
 	},
 	{
 		path: '/launchPage',

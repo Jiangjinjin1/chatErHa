@@ -51,12 +51,12 @@ export const modifyPassWord = async (params) => {
 
 export const addNickName = async (params) => {
 	const {
-		password
+		nickname
 	} = params
 	const result = await fetchApi({
 		url: '/admin/addNickName',
 		data: {
-			password
+			nickname
 		}
 	})
 	return result.data
