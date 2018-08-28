@@ -14,35 +14,40 @@ export default [
 		path: '/launchPage',
 		component: LauchPage,
 		meta: {
-			title: '登录'
+			title: '登录',
+			index: 0
 		}
 	},
 	{
 		path: '/registPage',
 		component: RegistPage,
 		meta: {
-			title: '注册'
+			title: '注册',
+			index: 1
 		}
 	},
 	{
 		path: '/resetPwPage',
 		component: ResetPwPage,
 		meta: {
-			title: '重置密码'
+			title: '重置密码',
+			index: 2
 		}
 	},
 	{
 		path: '/userInfoPage',
 		component: UserInfoPage,
 		meta: {
-			title: '用户信息'
+			title: '用户信息',
+			index: 3
 		}
 	},
 	{
 		path: '/chatWindowPage',
 		component: ChatWindowPage,
 		meta: {
-			title: '聊天窗口'
+			title: '聊天窗口',
+			index: 4
 		}
 	},
 	{

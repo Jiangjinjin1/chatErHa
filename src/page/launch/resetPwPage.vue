@@ -15,6 +15,7 @@
         <span>新密码</span>
         <icon name='password' class="phoneOrPass"/>
         <el-input
+          type="password"
           placeholder="请输入密码"
           v-model="password"
           clearable>

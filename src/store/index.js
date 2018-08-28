@@ -9,7 +9,8 @@ import ui from './modules/ui'
 Vue.use(Vuex)
 
 const state = {
-	userInfo: {}
+	userInfo: {},
+	chatMessages: [] // 聊天信息
 }
 
 export default new Vuex.Store({
@@ -20,7 +21,8 @@ export default new Vuex.Store({
 	plugins: [createPersistedState({
 		// 配置白名单
 		paths: [
-			'userInfo'
+			'userInfo',
+			'chatMessages'
 		]
 	})],
 	modules: {

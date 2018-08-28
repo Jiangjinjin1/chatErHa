@@ -13,11 +13,10 @@ export default async (options = {}) => {
 		data = {},
 		type = 'POST',
 		method = 'fetch',
-		env = ENV,
 		requestTimeout = 10 * 1000
 	} = options
 	const requestType = type.toUpperCase()
-	let requestUrl = hostURL(env, url)
+	let requestUrl = hostURL(url)
 
 	if (requestType === 'GET') {
 		let dataStr = '' // 数据拼接字符串

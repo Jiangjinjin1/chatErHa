@@ -13,19 +13,19 @@
         <div v-for="(item,msgIndex) in chatMessages" :key="msgIndex">
           <chat-info-left
             v-if="item.type==='1'"
-            :nickname="userInfo.nickname"
+            :nickname="item.nickname"
             :content="item.message"
             :imgSrc="images[item.imgRandom]"
           />
           <chat-info-right v-else
-            :nickname="userInfo.nickname"
+            :nickname="item.nickname"
             :content="item.message"
             :imgSrc="images[item.imgRandom]"
           />
         </div>
       </section>
       <section class="footerInput">
-        <el-input v-model="message" placeholder="请输入内容"></el-input>
+        <el-input v-model="message" placeholder="请输入内容" @keyup.enter.native="sendMessage"></el-input>
         <div class="sendMsg" @click="sendMessage">
           <img src="../../images/send-icon.png" alt="">
         </div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 import HeadTop from '../../components/header/head'
 import chatInfoLeft from '../../components/common/chatInfoLeft'
 import chatInfoRight from '../../components/common/chatInfoRight'
@@ -56,19 +56,18 @@ export default {
 		return {
 			title: '聊天窗口',
 			message: '',
-			chatMessages: [],
 			images
 		}
 	},
 
 	sockets: {
-		allPeople: function (data) {
-			this.chatMessages.push(data)
-		}
+		...mapMutations([
+			'SOCKET_USER_MESSAGE'
+		])
 	},
 
 	computed: {
-		...mapState(['userInfo'])
+		...mapState(['userInfo', 'chatMessages'])
 	},
 
 	components: {
@@ -78,6 +77,9 @@ export default {
 	},
 
 	methods: {
+		...mapMutations([
+			'SOCKET_USER_MESSAGE'
+		]),
 		sendMessage () {
 			if (this._.isEmpty(this.message)) {
 				ui.toast({title: '', msg: '不能发送空消息，请输入消息内容'})
@@ -87,9 +89,10 @@ export default {
 			const sendMsg = {
 				type: '0', // '0'代表自己发， ‘1’代表收到的信息
 				message: this.message,
-				imgRandom: this.userInfo.imgRandom
+				imgRandom: this.userInfo.imgRandom,
+				nickname: this.userInfo.nickname
 			}
-			this.chatMessages.push(sendMsg)
+			this.SOCKET_USER_MESSAGE(sendMsg)
 			this.$socket.emit('my-send', sendMsg)
 
 			this.message = ''

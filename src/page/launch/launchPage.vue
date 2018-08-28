@@ -18,6 +18,7 @@
         <span>密码</span>
         <icon name='password' class="phoneOrPass"/>
         <el-input
+          type="password"
           placeholder="请输入密码"
           v-model.trim="password"
           clearable>
@@ -65,8 +66,9 @@ export default {
 			'SET_USER_INFO'
 		]),
 		initData () {
-			const { username = '' } = this.userInfo
+			const { username = '', password = '' } = this.userInfo
 			this.phone = username
+			this.password = password
 		},
 		async login () {
 			if (this._.isEmpty(this.phone) && !checkSimpleMobilePhone(this.phone)) {
@@ -85,7 +87,7 @@ export default {
 			})
 
 			if (!this._.isEmpty(loginResult)) {
-				this.SET_USER_INFO(loginResult)
+				this.SET_USER_INFO({...loginResult, password: this.password})
 				this.$router.push({path: '/userInfoPage'})
 			}
 		},

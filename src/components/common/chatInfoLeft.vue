@@ -78,6 +78,8 @@ export default {
             max-width: 12.7rem;
             padding: .5rem 0;
             padding-left: 1.3rem;
+            word-break:break-all;
+            word-wrap:break-word; 
           }
         }
       }

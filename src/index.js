@@ -18,10 +18,9 @@ import './style/main.css'
 import './config/rem'
 import store from './store/index'
 import App from './App'
-import {ENV, DEV} from './config/env'
-import {setCookie} from './config/setCookie'
+import {hostURL} from './config/env'
 
-Vue.use(VueSocketio, socketio('http://localhost:9000/chat'))// 与服务端链接
+Vue.use(VueSocketio, socketio(hostURL('/chat')))// 与服务端链接
 
 Vue.use(infiniteScroll)
 
@@ -39,10 +38,6 @@ Vue.component('icon', Icon)
 
 Vue.prototype.$message = Message
 Vue.prototype._ = _
-
-if (ENV === DEV) {
-	setCookie()
-}
 
 router.beforeEach((to, from, next) => {
 	/* 路由发生变化修改页面title */

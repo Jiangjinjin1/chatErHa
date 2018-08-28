@@ -11,9 +11,9 @@ export const ENV = process.env.NODE_ENV
 export const DEV = 'development'
 export const PRO = 'production'
 export const devHost = 'localhost:9000'
-export const proHost = 'erha.smallerha.com'
+export const proHost = 'erha.smallerha.com:9000'
 export const devImgUrl = 'localhost:9000'
-export const proImgUrl = 'erha.smallerha.com'
+export const proImgUrl = 'erha.smallerha.com:9000'
 
 const newBaseURLMapping = {
 	[DEV]: `http://${devHost}`,
@@ -32,8 +32,8 @@ const phpImgBaseURLMapping = {
 
 export const routerMode = 'hash'
 
-export function hostURL (env = DEV, url) {
-	return `${newBaseURLMapping[String(env)]}${url}`
+export function hostURL (url) {
+	return `${newBaseURLMapping[String(ENV)]}${url}`
 }
 
 export const imgBaseUrl = imgBaseURLMapping[String(ENV)]
