@@ -11,6 +11,8 @@ import {
 import infiniteScroll from 'vue-infinite-scroll'
 import _ from 'lodash'
 import Icon from 'vue-svg-icon/Icon.vue'
+import VueSocketio from 'vue-socket.io'
+import socketio from 'socket.io-client'
 import router from './router'
 import './style/main.css'
 import './config/rem'
@@ -18,6 +20,8 @@ import store from './store/index'
 import App from './App'
 import {ENV, DEV} from './config/env'
 import {setCookie} from './config/setCookie'
+
+Vue.use(VueSocketio, socketio('http://localhost:9000/chat'))// 与服务端链接
 
 Vue.use(infiniteScroll)
 

@@ -3,6 +3,7 @@ const LauchPage = r => require.ensure([], () => r(require('../page/launch/launch
 const RegistPage = r => require.ensure([], () => r(require('../page/launch/registPage')), 'registPage')
 const ResetPwPage = r => require.ensure([], () => r(require('../page/launch/resetPwPage')), 'resetPwPage')
 const UserInfoPage = r => require.ensure([], () => r(require('../page/userinfo/userInfoPage')), 'userInfoPage')
+const ChatWindowPage = r => require.ensure([], () => r(require('../page/chatWindow/chatWindowPage')), 'chatWindowPage')
 
 export default [
 	{
@@ -35,6 +36,13 @@ export default [
 		component: UserInfoPage,
 		meta: {
 			title: '用户信息'
+		}
+	},
+	{
+		path: '/chatWindowPage',
+		component: ChatWindowPage,
+		meta: {
+			title: '聊天窗口'
 		}
 	},
 	{

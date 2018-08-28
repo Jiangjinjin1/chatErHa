@@ -22,6 +22,12 @@ export default {
 
 	},
 
+	sockets: {
+		connect: function () {
+			// console.log('socket connected-----------------http://localhost:9000/chat')
+		}
+	},
+
 	methods: {
 
 	},

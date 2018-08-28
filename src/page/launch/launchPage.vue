@@ -1,5 +1,5 @@
 <template>
-  <section class="container1">
+  <section class="launchContainer">
     <section class="avatar">
       <img :src="avatarUrl" alt="">
     </section>
@@ -65,7 +65,7 @@ export default {
 			'SET_USER_INFO'
 		]),
 		initData () {
-			const {username = '', password = ''} = this.userInfo
+			const { username = '' } = this.userInfo
 			this.phone = username
 		},
 		async login () {
@@ -80,10 +80,9 @@ export default {
 			const loginResult = await login({
 				username: this.phone,
 				password: this.password
-			}).catch(e=> {
-        ui.toast({title: '', msg: '用户信息返回为空'})
-        return
-      })
+			}).catch(e => {
+				ui.toast({title: '', msg: '用户信息返回为空'})
+			})
 
 			if (!this._.isEmpty(loginResult)) {
 				this.SET_USER_INFO(loginResult)
@@ -105,7 +104,7 @@ export default {
 <style>
   @import '../../style/mixin';
 
-  .container1{
+  .launchContainer{
     width: 100%;
     height: 100%;
     display: flex;

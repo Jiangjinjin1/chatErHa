@@ -9,7 +9,7 @@ import ui from './modules/ui'
 Vue.use(Vuex)
 
 const state = {
-	userInfo: null
+	userInfo: {}
 }
 
 export default new Vuex.Store({

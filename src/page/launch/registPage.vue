@@ -48,7 +48,7 @@ export default {
 	},
 
 	methods: {
-    ...mapMutations([
+		...mapMutations([
 			'SET_USER_INFO'
 		]),
 		async regist () {
@@ -63,12 +63,12 @@ export default {
 			const registResult = await registAccount({
 				username: this.phone,
 				password: this.password
-      })
-      
-      if(!this._.isEmpty(registResult)) {
-        this.SET_USER_INFO(registResult)
-        this.$router.go(-1)
-      }
+			})
+
+			if (!this._.isEmpty(registResult)) {
+				this.SET_USER_INFO(registResult)
+				this.$router.go(-1)
+			}
 		}
 	}
 }

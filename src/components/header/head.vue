@@ -1,19 +1,29 @@
 <template>
-    <header id='head_top' :class="!goBack?'headClass':''">
+    <header id='head_top' :class="{headClass:!goBack}" :style="headStyle">
         <section class="head_goback" v-if="goBack" @click="$router.go(-1)">
-            <icon name="back" class="iconSize" />
+            <icon :name="backIconName" class="iconSize" />
         </section>
         <section class="title_head ellipsis" v-if="headTitle">
-            <span class="title_text">{{headTitle}}</span>
+            <span class="title_text" :style="titleColor">{{headTitle}}</span>
         </section>
     </header>
 </template>
 
 <script>
-import Icon from 'vue-svg-icon/Icon'
 export default {
+	data () {
+		return {
+			headStyle: {
+				background: this.headBgColor
+			},
+			titleColor: {
+				color: this.textStyle,
+				'font-weight': 500,
+				'font-size': '.7rem'
+			}
+		}
+	},
 	components: {
-		Icon
 	},
 
 	mounted () {
@@ -28,6 +38,18 @@ export default {
 		goBack: {
 			type: Boolean,
 			default: false
+		},
+		headBgColor: {
+			type: String,
+			default: '#3190e8'
+		},
+		backIconName: {
+			type: String,
+			default: 'back'
+		},
+		textStyle: {
+			type: String,
+			default: '#fff'
 		}
 	},
 	methods: {
@@ -50,7 +72,7 @@ export default {
       justify-content: center;
     }
     .iconSize{
-        @mixin wh 1rem,1rem;
+        @mixin wh 1.2rem,1.2rem;
         fill: red;
     }
     .head_goback{
@@ -58,7 +80,7 @@ export default {
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      @mixin wh 0.6rem, 1rem;
+      @mixin wh 0.8rem, 1rem;
       margin-left: .4rem;
     }
     .title_head{

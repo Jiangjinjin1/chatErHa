@@ -41,25 +41,25 @@ export default {
 			phone: '',
 			password: ''
 		}
-  },
-  
-  computed: {
+	},
+
+	computed: {
 		...mapState([
 			'userInfo'
 		])
 	},
-  
-  created() {
-    this.initData()
-  },
+
+	created () {
+		this.initData()
+	},
 
 	components: {
 		HeadTop
 	},
 
 	methods: {
-    initData () {
-			const {username = '', password = ''} = this.userInfo
+		initData () {
+			const {username = ''} = this.userInfo
 			this.phone = username
 		},
 		async modifyPassWord () {
@@ -76,9 +76,9 @@ export default {
 				password: this.password
 			})
 
-			if(!this._.isEmpty(resetPwResult)) {
-        this.$router.go(-1)
-      }
+			if (!this._.isEmpty(resetPwResult)) {
+				this.$router.go(-1)
+			}
 		}
 	}
 }

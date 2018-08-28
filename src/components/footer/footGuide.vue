@@ -13,7 +13,6 @@
 
 <script>
 import {mapState} from 'vuex'
-import Icon from 'vue-svg-icon/Icon'
 export default {
 	data () {
 		return {
@@ -27,7 +26,6 @@ export default {
 
 	},
 	components: {
-		Icon
 	},
 	computed: {
 		...mapState([

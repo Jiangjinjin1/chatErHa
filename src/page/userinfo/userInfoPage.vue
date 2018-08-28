@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
+import {mapMutations, mapState} from 'vuex'
 import HeadTop from '../../components/header/head'
 import {addNickName} from '../../service/launchApi'
 import ui from '../../modules/ui/ui'
@@ -34,28 +34,36 @@ export default {
 		HeadTop
 	},
 	created () {
+		this.initData()
 	},
 
 	computed: {
+		...mapState([
+			'userInfo'
+		])
 	},
 
 	methods: {
-    ...mapMutations([
-      'SET_USER_INFO'
-    ]),
-    async confirmEdit() {
-      if(this._.isEmpty(this.nickname)) {
-        ui.toast({title: '', msg: '请填写昵称'})
-        return
-      }
-      
-      const nicknameResult = await addNickName({nickname: this.nickname})
-      
-      if(!this._.nicknameResult) {
-        this.SET_USER_INFO(nicknameResult)
-        // 跳转聊天窗口
-      }
-    }
+		...mapMutations([
+			'SET_USER_INFO'
+		]),
+		initData () {
+			this.nickname = this.userInfo.nickname
+		},
+		async confirmEdit () {
+			if (this._.isEmpty(this.nickname)) {
+				ui.toast({title: '', msg: '请填写昵称'})
+				return
+			}
+
+			const nicknameResult = await addNickName({nickname: this.nickname})
+
+			if (!this._.nicknameResult) {
+				this.SET_USER_INFO({...nicknameResult, imgRandom: Math.ceil(Math.random() * 7)})
+				// 跳转聊天窗口
+				this.$router.push({path: '/chatWindowPage'})
+			}
+		}
 	}
 }
 </script>
