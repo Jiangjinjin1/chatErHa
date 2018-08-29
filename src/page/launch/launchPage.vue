@@ -88,7 +88,11 @@ export default {
 
 			if (!this._.isEmpty(loginResult)) {
 				this.SET_USER_INFO({...loginResult, password: this.password})
-				this.$router.push({path: '/userInfoPage'})
+				if (!this._.isEmpty(this.userInfo.nickname)) {
+					this.$router.push({path: '/chatWindowPage'})
+				} else {
+					this.$router.push({path: '/userInfoPage'})
+				}
 			}
 		},
 

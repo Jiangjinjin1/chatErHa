@@ -32,7 +32,7 @@ const phpImgBaseURLMapping = {
 
 export const routerMode = 'hash'
 
-export function hostURL (url) {
+export function hostURL (url = '') {
 	return `${newBaseURLMapping[String(ENV)]}${url}`
 }
 

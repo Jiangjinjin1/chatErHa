@@ -1,14 +1,21 @@
-const Home = r => require.ensure([], () => r(require('../page/home/home1')), 'home1')
-const LauchPage = r => require.ensure([], () => r(require('../page/launch/launchPage')), 'launchPage')
-const RegistPage = r => require.ensure([], () => r(require('../page/launch/registPage')), 'registPage')
-const ResetPwPage = r => require.ensure([], () => r(require('../page/launch/resetPwPage')), 'resetPwPage')
-const UserInfoPage = r => require.ensure([], () => r(require('../page/userinfo/userInfoPage')), 'userInfoPage')
-const ChatWindowPage = r => require.ensure([], () => r(require('../page/chatWindow/chatWindowPage')), 'chatWindowPage')
+// const Home = r => require.ensure([], () => r(require('../page/home/home1')), 'home1')
+// const LauchPage = r => require.ensure([], () => r(require('../page/launch/launchPage')), 'launchPage')
+// const RegistPage = r => require.ensure([], () => r(require('../page/launch/registPage')), 'registPage')
+// const ResetPwPage = r => require.ensure([], () => r(require('../page/launch/resetPwPage')), 'resetPwPage')
+// const UserInfoPage = r => require.ensure([], () => r(require('../page/userinfo/userInfoPage')), 'userInfoPage')
+// const ChatWindowPage = r => require.ensure([], () => r(require('../page/chatWindow/chatWindowPage')), 'chatWindowPage')
+
+const Home = () => import('../page/home/home1')
+const LauchPage = () => import('../page/launch/launchPage')
+const RegistPage = () => import('../page/launch/registPage')
+const ResetPwPage = () => import('../page/launch/resetPwPage')
+const UserInfoPage = () => import('../page/userinfo/userInfoPage')
+const ChatWindowPage = () => import('../page/chatWindow/chatWindowPage')
 
 export default [
 	{
 		path: '',
-		redirect: '/launchPage'
+		redirect: '/chatWindowPage'
 	},
 	{
 		path: '/launchPage',
@@ -39,7 +46,8 @@ export default [
 		component: UserInfoPage,
 		meta: {
 			title: '用户信息',
-			index: 3
+			index: 3,
+			requireAuth: true
 		}
 	},
 	{
@@ -47,7 +55,8 @@ export default [
 		component: ChatWindowPage,
 		meta: {
 			title: '聊天窗口',
-			index: 4
+			index: 4,
+			requireAuth: true
 		}
 	},
 	{

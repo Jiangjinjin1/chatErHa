@@ -1,6 +1,7 @@
 import {
 	SET_USER_INFO,
-	SOCKET_USER_MESSAGE
+	SOCKET_USER_MESSAGE,
+	LOG_OUT
 } from './mutation-types'
 
 export default {
@@ -10,5 +11,10 @@ export default {
 
 	[SOCKET_USER_MESSAGE] (state, userMsg) {
 		state.chatMessages.push(userMsg)
+	},
+
+	[LOG_OUT] (state) {
+		state.userInfo = {}
 	}
+
 }

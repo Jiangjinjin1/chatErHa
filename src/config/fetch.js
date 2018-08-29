@@ -1,114 +1,155 @@
+import axios from 'axios'
 import queryString from 'query-string'
 import ui from '../modules/ui/ui'
 import {
-	hostURL,
-	ENV,
-	DEV
+	hostURL
 } from './env'
-import {timeout} from './promise'
+import responseBack from './responseBack'
+// import routers from '../router/index'
+// import store from '../store/index'
 
-export default async (options = {}) => {
+const instance = axios.create({
+	baseURL: hostURL(),
+	timeout: 30000,
+	headers: {
+		'Accept': 'application/json',
+		'Content-Type': 'application/x-www-form-urlencoded;charset=utf8'
+	}
+})
+
+instance.interceptors.request.use(function (config) {
+	ui.loading()
+	return config
+}, function (error) {
+	ui.toast({title: '', msg: error.message})
+	return Promise.reject(error)
+})
+
+instance.interceptors.response.use(function (response) {
+	const newResponse = response.data
+	ui.hideLoading()
+	if (newResponse.code !== 0) {
+		ui.toast({title: '', msg: newResponse.msg})
+		return Promise.reject(newResponse.msg)
+	}
+	if (newResponse.code === 2000) {
+		// 处理session时效拦截用的，但是router这狗日的实例引进来编译报错
+		ui.toast({title: '', msg: newResponse.msg})
+		// store.commit('LOG_OUT')
+		// console.log('routers: ', routers)
+		// routers.replace({
+		// 	path: '/launchPage'
+		// query: {redirect: router.currentRoute.fullPath}
+		// })
+		return Promise.reject(newResponse.msg)
+	}
+	return newResponse
+}, function (error) {
+	ui.hideLoading()
+	if (error && error.response) {
+		const statusValue = responseBack(error.response.status)
+		ui.toast({title: '', msg: statusValue})
+	}
+
+	return Promise.reject(error)
+})
+
+/**
+ * 封装get方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function fetch (url, params = {}) {
+	return new Promise((resolve, reject) => {
+		instance.get(url, {
+			params: params
+		})
+			.then(response => {
+				resolve(response.data)
+			})
+			.catch(err => {
+				reject(err)
+			})
+	})
+}
+
+/**
+ * 封装patch请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function patch (url, data = {}) {
+	return new Promise((resolve, reject) => {
+		instance.patch(url, data)
+			.then(response => {
+				resolve(response.data)
+			}, err => {
+				reject(err)
+			})
+	})
+}
+
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function put (url, data = {}) {
+	return new Promise((resolve, reject) => {
+		instance.put(url, data)
+			.then(response => {
+				resolve(response.data)
+			}, err => {
+				reject(err)
+			})
+	})
+}
+
+/**
+ * 封装uploadFile请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function uploadFile (url, data = {}) {
+	return new Promise((resolve, reject) => {
+		instance.post(url, data, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		}).then(response => {
+			resolve(response.data)
+		}, err => {
+			reject(err)
+		})
+	})
+}
+
+/**
+ * 封装post请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export default function post (params) {
 	const {
 		url = '',
-		data = {},
-		type = 'POST',
-		method = 'fetch',
-		requestTimeout = 10 * 1000
-	} = options
-	const requestType = type.toUpperCase()
-	let requestUrl = hostURL(url)
-
-	if (requestType === 'GET') {
-		let dataStr = '' // 数据拼接字符串
-		Object.keys(data).forEach(key => {
-			dataStr += key + '=' + data[key] + '&'
-		})
-
-		if (dataStr !== '') {
-			dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'))
-			requestUrl = requestUrl + '?' + dataStr
-		}
-	}
-
-	if (window.fetch && method === 'fetch') {
-		let requestConfig = {
-			credentials: 'include',
-			method: requestType,
-			headers: {
-				// 'Accept': 'application/json',
-				// 'Content-Type': 'application/json'
-				'Content-Type': 'application/x-www-form-urlencoded;charset=utf8'
-			},
-			mode: 'cors',
-			cache: 'no-cache'
-		}
-
-		if (requestType === 'POST') {
-			Object.defineProperty(requestConfig, 'body', {
-				value: queryString.stringify(data)
+		data = {}
+	} = params
+	return new Promise((resolve, reject) => {
+		instance.post(url, queryString.stringify(data))
+			.then(response => {
+				resolve(response.data)
+			}, err => {
+				reject(err)
 			})
-		}
-
-		try {
-			const response = await timeout(requestTimeout)(
-				fetch(requestUrl, requestConfig)
-			).catch((e) => {
-				let msg = '亲，您的网络连接失败，请重新尝试。'
-				if (ENV === DEV) {
-					msg = `${msg}/${e.message}`
-				}
-				ui.hideLoading()
-				ui.toast({title: '', msg: msg})
-				throw new Error(msg)
-			})
-			const responseJson = await response.json()
-			if (responseJson.code !== 0) {
-				ui.toast({title: '', msg: responseJson.msg})
-			}
-			return responseJson
-		} catch (error) {
-			ui.hideLoading()
-			ui.toast({title: '', msg: error.message})
-			throw new Error(error)
-		}
-	} else {
-		return new Promise((resolve, reject) => {
-			let requestObj
-			if (window.XMLHttpRequest) {
-				requestObj = new XMLHttpRequest()
-			} else {
-				/* eslint-disable */
-        requestObj = new ActiveXObject()
-        /* eslint-enable */
-			}
-
-			let sendData = ''
-			if (requestType === 'POST') {
-				sendData = queryString.stringify(data)
-			}
-
-			requestObj.open(requestType, requestUrl, true)
-			requestObj.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-			requestObj.send(sendData)
-
-			requestObj.onreadystatechange = () => {
-				if (requestObj.readyState === 4) {
-					let obj = requestObj.response
-					if (requestObj.status === 200) {
-						if (typeof obj !== 'object') {
-							obj = JSON.parse(obj)
-						}
-						if (obj.code !== 0) {
-							ui.toast({title: '', msg: obj.msg})
-						}
-						resolve(obj)
-					} else {
-						ui.toast({title: '', msg: '请求失败，请稍后重试'})
-						ui.hideLoading()
-						reject(new Error('请求失败，请稍后重试'))
-					}
-				}
-			}
-		})
-	}
+	})
 }

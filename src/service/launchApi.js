@@ -16,7 +16,7 @@ export const registAccount = async (params) => {
 			password
 		}
 	})
-	return result.data
+	return result
 }
 
 export const login = async (params) => {
@@ -31,7 +31,7 @@ export const login = async (params) => {
 			password
 		}
 	})
-	return result.data
+	return result
 }
 
 export const modifyPassWord = async (params) => {
@@ -46,7 +46,7 @@ export const modifyPassWord = async (params) => {
 			password
 		}
 	})
-	return result.data
+	return result
 }
 
 export const addNickName = async (params) => {
@@ -59,5 +59,5 @@ export const addNickName = async (params) => {
 			nickname
 		}
 	})
-	return result.data
+	return result
 }
