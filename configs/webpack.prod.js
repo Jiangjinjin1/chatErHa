@@ -42,7 +42,7 @@ base.module.rules.push({
     {
       loader: process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
       options: {
-        publicPath: process.env.NODE_ENV !== 'development'?'../':'./'
+        publicPath: '../'
       }
     },
     'css-loader',

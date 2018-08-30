@@ -2,7 +2,9 @@
 
 To start:
 
-`script:{"eslint": "eslint --format 'node_modules/eslint-friendly-formatter' file1 src"} 作为eslint命令也可以个人喜欢eslint报错显示风格`
+```
+script:{"eslint": "eslint --format 'node_modules/eslint-friendly-formatter' file1 src"} 作为eslint命令也可以个人喜欢eslint报错显示风格
+```
 
 ```bash
 $ npm install
@@ -25,12 +27,24 @@ $ npm run build
 一万点暴击伤害~~~~
 
 ```
+// 本地环境用这个
 new HtmlWebpackPlugin({
   title: config.title,
   template: path.resolve(__dirname, './index.html'),
   favicon: path.resolve(__dirname, '../public/favicon.png'),
   filename: './index.html',
   chunks: ['client'],
-  chunksSortMode: 'manual'// 解决了fetch.js引入router实例编译报错的问题
+  chunksSortMode: 'manual'// 解决了fetch.js引入router实例编译报错Cyclic dependency循环依赖错误
+})
+```
+
+```
+// 生产环境用这个配置
+new HtmlWebpackPlugin({
+  title: config.title,
+  template: path.resolve(__dirname, './index.html'),
+  favicon: path.resolve(__dirname, '../public/favicon.png'),
+  filename: './index.html',
+  chunksSortMode: 'none'// 本地和打包配置区分，如果用本地环境的配置，也会报Cyclic dependency循环依赖错误
 })
 ```

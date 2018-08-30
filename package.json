@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "prebuild": "rimraf ./dist",
-    "build": "node ./bin/build.js",
-    "start": "nodemon ./bin/start.js",
+    "build": "cross-env NODE_ENV=production node ./bin/build.js",
+    "start": "cross-env NODE_ENV=development nodemon ./bin/start.js",
     "unit": "karma start test/unit/karma.conf.js --single-run",
     "eslint": "node node_modules/eslint/bin/eslint.js src"
   },
@@ -37,6 +37,7 @@
     "babel-loader": "^8.0.0-beta.3",
     "babel-plugin-component": "latest",
     "chalk": "^2.4.1",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
     "cssnano": "^3.10.0",
     "eslint": "^4.19.1",
