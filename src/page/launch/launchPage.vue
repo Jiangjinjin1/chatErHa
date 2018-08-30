@@ -88,7 +88,10 @@ export default {
 
 			if (!this._.isEmpty(loginResult)) {
 				this.SET_USER_INFO({...loginResult, password: this.password})
-				if (!this._.isEmpty(this.userInfo.nickname)) {
+				if (!this._.isEmpty(this.userInfo._id) && !this._.isEmpty(this.$route.query.redirect)) {
+					// 如果接口返回session失效，从哪个页面返回到首页，在登录之后通过query里redirect路由字段跳转到对应失效的页面
+					this.$router.push({path: this.$route.query.redirect})
+				} else if (!this._.isEmpty(this.userInfo.nickname)) {
 					this.$router.push({path: '/chatWindowPage'})
 				} else {
 					this.$router.push({path: '/userInfoPage'})

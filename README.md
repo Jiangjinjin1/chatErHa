@@ -19,3 +19,18 @@ To build for production:
 ```bash
 $ npm run build
 ```
+
+此处最下面的chunks和chunksSortMode如果不这么手动配置，我在fetch.js文件里
+相应请求拦截时引入router实例就会报错，此处花了我一晚上时间查问题，好在终于搞定，
+一万点暴击伤害~~~~
+
+```
+new HtmlWebpackPlugin({
+  title: config.title,
+  template: path.resolve(__dirname, './index.html'),
+  favicon: path.resolve(__dirname, '../public/favicon.png'),
+  filename: './index.html',
+  chunks: ['client'],
+  chunksSortMode: 'manual'// 解决了fetch.js引入router实例编译报错的问题
+})
+```

@@ -52,7 +52,9 @@ module.exports = {
       title: config.title,
       template: path.resolve(__dirname, './index.html'),
       favicon: path.resolve(__dirname, '../public/favicon.png'),
-      filename: './index.html'
+      filename: './index.html',
+      chunks: ['client'],
+      chunksSortMode: 'manual'// 解决了fetch.js引入router实例编译报错的问题
     }),
     new VueLoaderPlugin()
   ]
