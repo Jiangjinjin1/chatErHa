@@ -59,9 +59,9 @@ export default {
 			const nicknameResult = await addNickName({nickname: this.nickname})
 
 			if (!this._.nicknameResult) {
-				this.SET_USER_INFO({...nicknameResult, imgRandom: Math.floor(Math.random() * 7)})
-				// 跳转聊天窗口
-				this.$router.push({path: '/chatWindowPage'})
+				this.SET_USER_INFO({...nicknameResult})
+				// 跳转头像上传
+				this.$router.push({path: '/userAvatarUploadPage'})
 			}
 		}
 	}

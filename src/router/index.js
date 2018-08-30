@@ -30,7 +30,7 @@ router.beforeEach((to, from, next) => {
 	}
 	// console.log('router.currentRoute.fullPath:', router.currentRoute.fullPath)
 	// 做免登陆校验
-	if (to.matched.some(record => record.meta.requireAuth === true) && _.isEmpty(store.state.userInfo)) {
+	if (to.matched.some(record => record.meta.requireAuth === true) && (_.isEmpty(store.state.userInfo) || _.isEmpty(store.state.userInfo.avatar))) {
 		store.dispatch('checkLogin', next)
 	} else {
 		next()

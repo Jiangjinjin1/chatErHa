@@ -11,6 +11,7 @@ const RegistPage = () => import('../page/launch/registPage')
 const ResetPwPage = () => import('../page/launch/resetPwPage')
 const UserInfoPage = () => import('../page/userinfo/userInfoPage')
 const ChatWindowPage = () => import('../page/chatWindow/chatWindowPage')
+const UserAvatarUpload = () => import('../page/uploadAvatar/userAvatarUpload')
 
 export default [
 	{
@@ -56,6 +57,15 @@ export default [
 		meta: {
 			title: '聊天窗口',
 			index: 4,
+			requireAuth: true
+		}
+	},
+	{
+		path: '/userAvatarUploadPage',
+		component: UserAvatarUpload,
+		meta: {
+			title: '上传头像',
+			index: 5,
 			requireAuth: true
 		}
 	},

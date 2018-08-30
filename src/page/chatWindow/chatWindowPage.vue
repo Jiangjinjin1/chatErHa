@@ -15,12 +15,12 @@
             v-if="item.type==='1'"
             :nickname="item.nickname"
             :content="item.message"
-            :imgSrc="images[item.imgRandom]"
+            :imgSrc="phpImgUrl + item.avatar"
           />
           <chat-info-right v-else
             :nickname="item.nickname"
             :content="item.message"
-            :imgSrc="images[item.imgRandom]"
+            :imgSrc="phpImgUrl + item.avatar"
           />
         </div>
       </section>
@@ -40,23 +40,14 @@ import HeadTop from '../../components/header/head'
 import chatInfoLeft from '../../components/common/chatInfoLeft'
 import chatInfoRight from '../../components/common/chatInfoRight'
 import ui from '../../modules/ui/ui'
-
-const images = [
-	require('../../images/001.jpg'),
-	require('../../images/002.jpg'),
-	require('../../images/003.jpg'),
-	require('../../images/004.jpg'),
-	require('../../images/005.jpg'),
-	require('../../images/006.jpg'),
-	require('../../images/007.jpg')
-]
+import {phpImgUrl} from '../../config/env'
 
 export default {
 	data () {
 		return {
 			title: '聊天窗口',
 			message: '',
-			images
+			phpImgUrl
 		}
 	},
 
@@ -89,8 +80,8 @@ export default {
 			const sendMsg = {
 				type: '0', // '0'代表自己发， ‘1’代表收到的信息
 				message: this.message,
-				imgRandom: this.userInfo.imgRandom,
-				nickname: this.userInfo.nickname
+				nickname: this.userInfo.nickname,
+				avatar: this.userInfo.avatar
 			}
 			this.SOCKET_USER_MESSAGE(sendMsg)
 			this.$socket.emit('my-send', sendMsg)

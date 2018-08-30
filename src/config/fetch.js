@@ -118,7 +118,11 @@ export function put (url, data = {}) {
  * @returns {Promise}
  */
 
-export function uploadFile (url, data = {}) {
+export function uploadFile (params) {
+	const {
+		url = '',
+		data = {}
+	} = params
 	return new Promise((resolve, reject) => {
 		instance.post(url, data, {
 			headers: {
