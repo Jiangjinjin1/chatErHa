@@ -78,13 +78,13 @@ export default {
 			}
 
 			const sendMsg = {
-				type: '0', // '0'代表自己发， ‘1’代表收到的信息
+				// type: '0', // '0'代表自己发， ‘1’代表收到的信息
 				message: this.message,
 				nickname: this.userInfo.nickname,
 				avatar: this.userInfo.avatar
 			}
-			this.SOCKET_USER_MESSAGE(sendMsg)
-			this.$socket.emit('my-send', sendMsg)
+			// this.SOCKET_USER_MESSAGE(sendMsg)
+			this.$socket.emit('SEND_MESSAGE', sendMsg)
 
 			this.message = ''
 		}
