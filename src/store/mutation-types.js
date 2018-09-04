@@ -1,3 +1,5 @@
 export const SET_USER_INFO = 'SET_USER_INFO'
 export const SOCKET_USER_MESSAGE = 'SOCKET_USER_MESSAGE'
 export const LOG_OUT = 'LOG_OUT'
+export const SHOW_USER_JOIN = 'SHOW_USER_JOIN'
+export const SHOW_USER_LEAVE = 'SHOW_USER_LEAVE'

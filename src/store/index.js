@@ -10,7 +10,8 @@ Vue.use(Vuex)
 
 const state = {
 	userInfo: {},
-	chatMessages: [] // 聊天信息
+	chatMessages: [], // 聊天信息
+	groupUsersInfo: {} // 群用户信息
 }
 
 export default new Vuex.Store({

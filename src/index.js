@@ -3,10 +3,7 @@ import Vue from 'vue'
 import {
 	Button,
 	Message,
-	Input,
-	Dropdown,
-	DropdownMenu,
-	DropdownItem
+	Input
 } from 'element-ui'
 import infiniteScroll from 'vue-infinite-scroll'
 import _ from 'lodash'
@@ -26,10 +23,7 @@ Vue.use(infiniteScroll)
 
 const UIComponents = [
 	Button,
-	Input,
-	Dropdown,
-	DropdownMenu,
-	DropdownItem
+	Input
 ]
 for (let i = 0, len = UIComponents.length; i < len; i++) {
 	Vue.component(UIComponents[i].name, UIComponents[i])

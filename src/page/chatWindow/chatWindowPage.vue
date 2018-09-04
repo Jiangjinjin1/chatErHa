@@ -51,14 +51,20 @@ export default {
 		}
 	},
 
+	mounted () {
+		this.$socket.emit('USER_JOIN', {
+			username: this.userInfo.nickname
+		})
+	},
+
 	sockets: {
 		...mapMutations([
-			'SOCKET_USER_MESSAGE'
+			'SOCKET_USER_MESSAGE', 'SHOW_USER_JOIN', 'SHOW_USER_LEAVE'
 		])
 	},
 
 	computed: {
-		...mapState(['userInfo', 'chatMessages'])
+		...mapState(['userInfo', 'chatMessages', 'groupUsersInfo'])
 	},
 
 	components: {
