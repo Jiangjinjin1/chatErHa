@@ -20,6 +20,7 @@
     "query-string": "^6.1.0",
     "socket.io-client": "^2.1.1",
     "vue": "latest",
+    "vue-drawer-layout": "^0.3.1",
     "vue-infinite-scroll": "^2.0.2",
     "vue-router": "latest",
     "vue-socket.io": "^2.1.1-b",

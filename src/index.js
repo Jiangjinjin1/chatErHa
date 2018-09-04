@@ -10,6 +10,7 @@ import _ from 'lodash'
 import Icon from 'vue-svg-icon/Icon.vue'
 import VueSocketio from 'vue-socket.io'
 import socketio from 'socket.io-client'
+import DrawerLayout from 'vue-drawer-layout'
 import router from './router'
 import './style/main.css'
 import './config/rem'
@@ -20,6 +21,8 @@ import {hostURL} from './config/env'
 Vue.use(VueSocketio, socketio(hostURL('/chat')))// 与服务端链接
 
 Vue.use(infiniteScroll)
+
+Vue.use(DrawerLayout) // vue-drawer-layout
 
 const UIComponents = [
 	Button,

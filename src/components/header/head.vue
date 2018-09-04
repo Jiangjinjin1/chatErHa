@@ -6,6 +6,7 @@
         <section class="title_head ellipsis" v-if="headTitle">
             <span class="title_text" :style="titleColor">{{headTitle}}</span>
         </section>
+        <slot name="rightEle"></slot>
     </header>
 </template>
 
