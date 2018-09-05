@@ -125,11 +125,11 @@ export default {
 			this.$socket.emit('SEND_MESSAGE', sendMsg)
 
 			this.message = ''
-    },
-    
-    handleMaskClick() {
-      this.$refs.drawer.toggle()
-    }
+		},
+
+		handleMaskClick () {
+			this.$refs.drawer.toggle()
+		}
 	}
 }
 </script>

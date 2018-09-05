@@ -67,19 +67,41 @@ export default {
         }
         .rightMessage{
           display: flex;
-          @mixin bis Shape1;
-          width: 13.8rem;
-          min-height: 3.1rem; 
           align-items: center;
+          margin-left: .7rem;
+          ::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -.4rem;
+            width: .3rem;
+            height: .3rem;
+            border-width: 0 0 .4rem .4rem;
+            border-style: solid;
+            border-bottom-color: inherit;   /*自动继承父元素的border-bottom-color*/
+            border-left-color: transparent;
+            border-radius: 0 0 1rem 0;
+            transform: rotateY(180deg)
+          }
           .content{
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-bottom-color:#ffffff;
+            position: relative;
+            box-sizing: border-box;
+            max-width: 12.7rem;
             font-size: .65rem;
             color: #434a54;
+            font-family: Arial;
             font-weight: 500;
+            line-height: .9rem;
             max-width: 12.7rem;
-            padding: .5rem 0;
-            padding-left: 1.3rem;
+            padding: .3rem .6rem .3rem .6rem;
             word-break:break-all;
-            word-wrap:break-word; 
+            word-wrap:break-word;
+            border-radius: .3rem;
+            box-shadow: .15rem .15rem .5rem #888888;
           }
         }
       }
